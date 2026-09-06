@@ -1,14 +1,6 @@
 # VINTF FCM level 7 stubs for kernel 5.4
-# These configs don't exist in 5.4 but are required by Android 17 VINTF check
-
-config CC_STACKPROTECTOR_STRONG
-	def_bool STACKPROTECTOR_STRONG
-
-config ANDROID_LOW_MEMORY_KILLER
-	def_bool y
-
-config ANDROID_PARANOID_NETWORK
-	def_bool y
+# These configs are required =y by VINTF ARM64 conditional block
+# but don't exist as Kconfig options in kernel 5.4
 
 config HAVE_MOVE_PMD
 	def_bool y
@@ -18,12 +10,3 @@ config HAVE_MOVE_PUD
 
 config KFENCE
 	def_bool y
-
-config NF_CONNTRACK_IPV6
-	def_bool NF_CONNTRACK
-
-config RETPOLINE
-	def_bool y
-
-config CPU_SW_DOMAIN_PAN
-	def_bool n
