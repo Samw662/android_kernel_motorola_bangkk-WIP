@@ -3142,6 +3142,7 @@ static int check_modinfo_livepatch(struct module *mod, struct load_info *info)
 }
 #endif /* CONFIG_LIVEPATCH */
 
+#ifdef CONFIG_RETPOLINE
 static void check_modinfo_retpoline(struct module *mod, struct load_info *info)
 {
 	if (retpoline_module_ok(get_modinfo(info, "retpoline")))
@@ -3150,6 +3151,10 @@ static void check_modinfo_retpoline(struct module *mod, struct load_info *info)
 	pr_warn("%s: loading module not compiled with retpoline compiler.\n",
 		mod->name);
 }
+#else
+static inline void check_modinfo_retpoline(struct module *mod,
+					   struct load_info *info) {}
+#endif
 
 /* Sets info->hdr and info->len. */
 static int copy_module_from_user(const void __user *umod, unsigned long len,
